@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Libre+Baskerville&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/css/styles.css">
+   <title>Weather App</title>
+</head>
+<body>
+
+   <div class="container weather-app p-4">
+       <form action="/" method="post" class="row g-2">
+           <div class="input-group mb-4 pt-2">
+            <input type="text" class="form-control" placeholder="Enter city..." name="cityName" aria-describedby="button-addon2">
+            <button class="btn check-btn" type="submit" name="button"><img src="/images/search.svg.svg" alt="search" id="search-img"></button>
+          </div>
+       </form>
+       <!-- contents -->
+       <div class="contents text-center">
+            <% if(locals.content && locals.content.name){ %>
+                <h1 class="fw-bolder"><%= content.name.charAt(0).toUpperCase() + content.name.slice(1) %></h1>
+                <p class="fs-5"><%= date %></p>
+
+                <% if (content.weather[0].main === "Clouds") { %>
+                    <img src="/images/clouds.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Clear") { %>
+                    <img src="/images/clear.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Drizzle") { %>
+                    <img src="/images/drizzle.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Rain") { %>
+                    <img src="/images/rain.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Snow") { %>
+                    <img src="/images/snow.png" class="weather-icon">
+                <% } %>
+
+               <h1><%= Math.round(content.main.temp) %>°C</h1>
+
+               <div class="underline-div mt-4 text-center row">
+                <div class="col-4">
+                    <div class="row">
+                        <img src="/images/sunset-svg.svg" class="icons col-12">
+                        <p class="col-12 add-info">SUNSET</p>
+                        <p class="col-12 add-info fw-bolder"><%= sunset %></p>
+                    </div>
+                </div>
+                <div class="col-4 wind">
+                    <div class="row">
+                        <img src="/images/wind-svg.svg" class="icons col-12" id="wind-svg">
+                        <p class="col-12 add-info">WIND</p>
+                        <p class="col-12 add-info fw-bolder"><%= Math.round(content.wind.speed) %>m/s</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <img src="/images/humidity-svg.svg" class="icons col-12">
+                        <p class="col-12 add-info">HUMIDITY</p>
+                        <p class="col-12 add-info fw-bolder"><%= content.main.humidity %>%</p>
+                    </div>
+                </div>
+              </div>
+            <% } else { %>
+                <h1 class="fw-bolder"><%= homeCity %></h1>
+                <p class="fs-5"><%= date %></p>
+
+                <% if (content.weather[0].main === "Clouds") { %>
+                    <img src="/images/clouds.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Clear") { %>
+                    <img src="/images/clear.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Drizzle") { %>
+                    <img src="/images/drizzle.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Rain") { %>
+                    <img src="/images/rain.png" class="weather-icon">
+                <% } else if (content.weather[0].main === "Snow") { %>
+                    <img src="/images/snow.png" class="weather-icon">
+                <% } %>
+
+               <h1><%= Math.round(content.main.temp) %>°C</h1>
+
+               <div class="underline-div mt-4 text-center row">
+                <div class="col-4">
+                    <div class="row">
+                        <img src="/images/sunset-svg.svg" class="icons col-12">
+                        <p class="col-12 add-info">SUNSET</p>
+                        <p class="col-12 add-info fw-bolder"><%= homeSunset %></p>
+                    </div>
+                </div>
+                <div class="col-4 wind">
+                    <div class="row">
+                        <img src="/images/wind-svg.svg" class="icons col-12" id="wind-svg">
+                        <p class="col-12 add-info">WIND</p>
+                        <p class="col-12 add-info fw-bolder"><%= Math.round(content.wind.speed) %>m/s</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <img src="/images/humidity-svg.svg" class="icons col-12">
+                        <p class="col-12 add-info">HUMIDITY</p>
+                        <p class="col-12 add-info fw-bolder"><%= content.main.humidity %>%</p>
+                    </div>
+                </div>
+              </div>
+            <% } %>
+
+       </div>
+   </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
